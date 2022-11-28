@@ -22,8 +22,7 @@
 
 ;Ask for Anti-HBc if ant-hdv is negative
 (defrule ask-anti-hbc-1
-    (and (anti-hdv negative)
-         (hbsag positive))
+    (anti-hdv negative)
 =>
     (printout t "Anti-HBc [positive/negative]? ")
     (assert (anti-hbc (read)))
