@@ -13,6 +13,13 @@
     (assert (anti-hdv (read)))
 )
 
+;Give predict if anti-hdv is positive
+(defrule predict-1
+    (anti-hdv positive)
+=>
+    (printout t "Hasil Prediksi: Hepatitis B+D" crlf)
+)
+
 ;Ask for Anti-HBc if ant-hdv is negative
 (defrule ask-anti-hbc-1
     (and (anti-hdv negative)
@@ -20,6 +27,14 @@
 =>
     (printout t "Anti-HBc [positive/negative]? ")
     (assert (anti-hbc (read)))
+)
+
+;Give predict if anti-hbc is negative
+(defrule predict-2
+    (and (anti-hbc negative)
+         (hbsag positive))
+=>
+    (printout t "Hasil Prediksi: Uncertain Configuration" crlf)
 )
 
 ;Ask for Anti-HBs if anti-hbc is positive
@@ -32,7 +47,7 @@
 )
 
 ;Give predict if anti-hbs is positive
-(defrule predict-1
+(defrule predict-3
     (and (anti-hbs positive)
          (hbsag positive))
 =>
@@ -49,32 +64,17 @@
 )
 
 ;Give predict if igm-anti-hbc is positive
-(defrule predict-2
+(defrule predict-4
     (igm-anti-hbc positive)
 =>
     (printout t "Hasil Prediksi: Acute Infection" crlf)
 )
 
 ;Give predict if igm-anti-hbc is negative
-(defrule predict-3
+(defrule predict-5
     (igm-anti-hbc negative)
 =>
     (printout t "Hasil Prediksi: Chronic Infection" crlf)
-)
-
-;Give predict if anti-hbc is negative
-(defrule predict-4
-    (and (anti-hbc negative)
-         (hbsag positive))
-=>
-    (printout t "Hasil Prediksi: Uncertain Configuration" crlf)
-)
-
-;Give predict if anti-hdv is positive
-(defrule predict-5
-    (anti-hdv positive)
-=>
-    (printout t "Hasil Prediksi: Hepatitis B+D" crlf)
 )
 
 ;Ask if hbsag negative
